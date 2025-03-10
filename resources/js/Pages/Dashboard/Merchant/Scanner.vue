@@ -35,7 +35,7 @@
 
 <script>
 import Header from '@/Layout/Dashboard/header.vue';
-import Sidebar from '@/Layout/Dashboard/sidebar.vue';
+import Sidebar from '@/Layout/Sidebar/merchantSidebar.vue';
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import { Html5QrcodeScanner } from 'html5-qrcode';

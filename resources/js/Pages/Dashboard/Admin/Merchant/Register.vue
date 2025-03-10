@@ -116,7 +116,7 @@
 
 <script>
 import Header from '@/Layout/Dashboard/header.vue';
-import Sidebar from '@/Layout/Dashboard/sidebar.vue';
+import Sidebar from '@/Layout/Sidebar/adminSidebar.vue';
 import Stepper from '@/Layout/Merchant/Stepper.vue';
 import Swal from 'sweetalert2';
 import axios from 'axios';

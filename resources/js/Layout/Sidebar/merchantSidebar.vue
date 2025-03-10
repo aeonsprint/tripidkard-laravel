@@ -105,11 +105,34 @@ bg-white border-e border-gray-200 dark:bg-neutral-800 dark:border-neutral-700" r
                                             </a>
                                         </li>
 
-                                        <li>
-                                            <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                                                href="/merchant/raffle-draw">
+                                        <li class="hs-accordion" id="users-accordion-sub-1">
+                                            <button type="button"
+                                                class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200"
+                                                aria-expanded="true" aria-controls="users-accordion-sub-1-collapse-1">
                                                 Raffles
-                                            </a>
+                                                <span
+                                                    class="material-icons material-symbols-outlined ms-auto  text-gray-600 group-hover:text-gray-500 dark:text-neutral-400">keyboard_arrow_right</span>
+                                            </button>
+
+                                            <div id="users-accordion-sub-1-collapse-1"
+                                                class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+                                                role="region" aria-labelledby="users-accordion-sub-1">
+                                                <ul class="pt-1 ps-2 space-y-1">
+                                                    <li>
+                                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200"
+                                                            href="/merchant/raffle-draw">
+                                                            Raffles Draw
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200"
+                                                            href="/merchant/raffle/create">
+                                                            Create Raffle
+                                                        </a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
                                         </li>
 
                                         <li>
@@ -123,96 +146,6 @@ bg-white border-e border-gray-200 dark:bg-neutral-800 dark:border-neutral-700" r
                                 </div>
                             </li>
                             <!-- End Engagement -->
-
-
-                            <!-- Merchant -->
-
-                            <li class="hs-accordion" id="account-accordion">
-                                <button type="button"
-                                    class="hs-accordion-toggle w-full text-start flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hs-accordion-active:text-white dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
-                                    aria-expanded="true" aria-controls="account-accordion-sub-1-collapse-1">
-                                    <span class="material-icons  material-symbols-outlined ">group</span>
-
-                                    Merchants
-                                    <span
-                                        class="material-icons material-symbols-outlined ms-auto  text-gray-600 group-hover:text-gray-500 dark:text-neutral-400">keyboard_arrow_right</span>
-
-                                </button>
-
-                                <div id="account-accordion-sub-1-collapse-1"
-                                    class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
-                                    role="region" aria-labelledby="account-accordion">
-                                    <ul class="pt-1 ps-7 space-y-1">
-
-                                        <li>
-                                            <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                                                href="/administrator/merchant/pending">
-
-                                                Merchant Pending <span
-                                                    class="ms-auto py-0.5 px-2 inline-flex items-center gap-x-1.5 text-xs bg-blue-400 text-white rounded-full dark:bg-neutral-600 dark:text-blue-400">Pro</span>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                                                href="/administrator/merchant/list">
-
-                                                Merchant List
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                                                href="/administrator/merchant/archived">
-                                                Merchant Archive
-                                            </a>
-                                        </li>
-
-
-                                    </ul>
-                                </div>
-                            </li>
-                            <!-- End Merchant -->
-
-                            <!-- Merchant -->
-
-                            <li class="hs-accordion" id="account-accordion">
-                                <button type="button"
-                                    class="hs-accordion-toggle w-full text-start flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hs-accordion-active:text-white dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
-                                    aria-expanded="true" aria-controls="account-accordion-sub-1-collapse-1">
-                                    <span class="material-icons  material-symbols-outlined ">group</span>
-
-                                    Customers
-                                    <span
-                                        class="material-icons material-symbols-outlined ms-auto  text-gray-600 group-hover:text-gray-500 dark:text-neutral-400">keyboard_arrow_right</span>
-                                </button>
-
-                                <div id="account-accordion-sub-1-collapse-1"
-                                    class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
-                                    role="region" aria-labelledby="account-accordion">
-                                    <ul class="pt-1 ps-7 space-y-1">
-
-
-                                        <li>
-                                            <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                                                href="/administrator/customer/list">
-
-                                                Customer List
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                                                href="/administrator/customer/archived">
-                                                Customer Archive
-                                            </a>
-                                        </li>
-
-
-                                    </ul>
-                                </div>
-                            </li>
-                            <!-- End Merchant -->
 
 
                             <li>
@@ -276,5 +209,3 @@ bg-white border-e border-gray-200 dark:bg-neutral-800 dark:border-neutral-700" r
         <!-- End Content -->
     </body>
 </template>
-
-

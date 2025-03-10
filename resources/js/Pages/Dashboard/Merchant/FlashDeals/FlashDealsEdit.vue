@@ -46,7 +46,7 @@
 
 <script>
 import Header from '@/Layout/Dashboard/header.vue';
-import Sidebar from '@/Layout/Dashboard/sidebar.vue';
+import Sidebar from '@/Layout/Sidebar/merchantSidebar.vue';
 import Table from '@/Layout/Dashboard/Merchant/Discount/table.vue';
 
 export default {

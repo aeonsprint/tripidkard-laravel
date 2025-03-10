@@ -71,7 +71,7 @@
         </div>
 
         <!-- Pagination -->
-        <div class="flex justify-center sm:justify-end items-center mt-4 bg-white p-2 rounded-lg">
+        <div  v-if="showPagination && isMerchantListPage" class="flex justify-center sm:justify-end items-center mt-4 bg-white p-2 rounded-lg">
             <button :disabled="currentPage === 1" @click="currentPage--"
                 class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-blue-500 hover:text-white disabled:bg-gray-300 disabled:text-gray-500">
                 Previous
@@ -99,7 +99,8 @@ import { useRoute } from "vue-router";
 const props = defineProps({
     itemsPerPage: { type: Number, default: 20 },
     title: { type: String, default: "Merchants Deals and Discounts" },
-    showSeeMore: { type: Boolean, default: true }
+    showSeeMore: { type: Boolean, default: true },
+    showPagination: { type: Boolean, default: true }
 });
 
 const emit = defineEmits(["updateMerchantCount"]); // <-- Emit event

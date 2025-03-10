@@ -11,6 +11,7 @@ use App\Http\Controllers\CardCodeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\MerchantController;
+use App\Http\Controllers\RaffleDrawController;
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\ApplicationController;
 
@@ -136,6 +137,8 @@ Route::post('/api/raffles/create', [RaffleController::class, 'store']);
 Route::get('/api/raffles', [RaffleController::class, 'index']);
 Route::get('/api/raffles/{id}/edit', [RaffleController::class, 'raffleEdit']);
 Route::get('/api/raffles/{id}/show', [RaffleController::class, 'raffleShow']);
+Route::post('/api/raffles/join', [RaffleDrawController::class, 'joinRaffle']);
+Route::get('/api/raffles/{id}/participants', [RaffleDrawController::class, 'getRaffleParticipants']);
 
 
 Route::get('/auth/google', [SocialController::class, 'redirectGoogle'])->name('google-auth');
@@ -147,7 +150,7 @@ Route::get('/facebook/callback', [SocialController::class, 'callbackFacebook']);
 
 Route::get('/api//bookmarks', [BookmarkController::class, 'index']); // Fetch user's bookmarks
 Route::post('/api//bookmarks', [BookmarkController::class, 'store']); // Add bookmark
-Route::delete('/api//bookmarks/{merchant_id}', [BookmarkController::class, 'destroy']); // Remove bookmark
+Route::delete('/api/bookmarks/{merchant_id}', [BookmarkController::class, 'destroy']); // Remove bookmark
 
 Route::get('{view}', ApplicationController::class)->where('view', '(.*)');
 

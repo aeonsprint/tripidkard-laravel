@@ -16,7 +16,7 @@
 
 <script>
 import Header from '@/Layout/Dashboard/header.vue';
-import Sidebar from '@/Layout/Dashboard/sidebar.vue';
+import Sidebar from '@/Layout/Sidebar/adminSidebar.vue';
 import Content from '@/Layout/Dashboard/Merchant/Profile/content.vue';
 import Breadcrumb from '@/Components/Molecules/Breadcrumb.vue';
 

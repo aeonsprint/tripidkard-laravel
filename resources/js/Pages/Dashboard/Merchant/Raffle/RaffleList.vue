@@ -32,7 +32,7 @@
                 </div>
                 <div class="flex flex-col items-center">
                     <i class="fa-solid fa-hourglass-end text-blue-500 text-2xl"></i>
-                    <p class="text-sm text-gray-500">entries Deadline</p>
+                    <p class="text-sm text-gray-500">Entries Deadline</p>
                     <p class="font-medium">{{ raffle.entries_deadline }}</p>
                 </div>
                 <div class="flex flex-col items-center">
@@ -50,20 +50,25 @@
             <!-- Mechanics -->
             <div class="border rounded-lg p-4 bg-gray-100 text-sm">
                 <h3 class="font-semibold mb-2">Mechanics</h3>
-                <p class="text-gray-600">{{ raffle.mechanics }}</p>
+                <p class="text-gray-600"  v-html="raffle.mechanics"></p>
             </div>
+
+            <!-- Participants Table -->
+            <div class="mt-8">
+                <h3 class="text-lg font-semibold mb-4">Participants</h3>
+                <Table :tableData="participants" :columns="participantColumns" />
+            </div>
+
           </div>
         </div>
         <div v-else class="text-center text-gray-500">No active raffles available.</div>
-
-        <Table :tableData="tableData" :columns="columns" />
       </div>
     </div>
 </template>
 
 <script>
 import Header from '@/Layout/Dashboard/header.vue';
-import Sidebar from '@/Layout/Dashboard/sidebar.vue';
+import Sidebar from '@/Layout/Sidebar/merchantSidebar.vue';
 import Table from '@/Layout/table.vue';
 import axios from 'axios';
 
@@ -76,6 +81,7 @@ export default {
   data() {
     return {
       raffles: [],
+      participants: [], // Participants list
       columns: [
         { label: 'Name', key: 'name' },
         { label: 'Age', key: 'age' },
@@ -87,12 +93,16 @@ export default {
         { name: 'Michael Johnson', age: 40, address: '789 Pine St, Texas' },
         { name: 'Sarah Brown', age: 25, address: '101 Maple St, Florida' },
         { name: 'Chris Evans', age: 30, address: '222 Oak St, Chicago' }
+      ],
+      participantColumns: [
+        { label: 'Customer Name', key: 'customer_name' },
+        { label: 'Joined Date', key: 'joined_at' }
       ]
     };
   },
   computed: {
     activeRaffles() {
-      return this.raffles.filter(raffle => raffle.status === 0); // Show only active raffles
+      return this.raffles.filter(raffle => raffle.status === 0);
     }
   },
   methods: {
@@ -100,8 +110,21 @@ export default {
       try {
         const response = await axios.get('/api/raffles');
         this.raffles = response.data;
+
+        // Fetch participants kapag nakuha na ang raffles
+        if (this.raffles.length > 0) {
+          this.fetchParticipants(this.raffles[0].id);
+        }
       } catch (error) {
         console.error("Error fetching raffles:", error);
+      }
+    },
+    async fetchParticipants(raffleId) {
+      try {
+        const response = await axios.get(`/api/raffles/${raffleId}/participants`);
+        this.participants = response.data;
+      } catch (error) {
+        console.error("Error fetching participants:", error);
       }
     },
     getImageUrl(imagePath) {

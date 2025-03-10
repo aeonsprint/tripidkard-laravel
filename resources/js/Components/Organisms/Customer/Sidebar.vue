@@ -50,10 +50,10 @@ export default {
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     await authStore.logout(); // Ensure logout completes
-                    // router.push("/login"); // Redirect to login page
-                    // setTimeout(() => {
-                    //     window.location.reload(); // Reload after redirect
-                    // }, 100);
+                    router.push("/login"); // Redirect to login page
+                    setTimeout(() => {
+                        window.location.reload(); // Reload after redirect
+                    }, 100);
                 }
             });
         };

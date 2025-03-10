@@ -52,18 +52,20 @@ class ProfileController extends Controller
             $profileDetails['city'] = $influencer->city;
             $profileDetails['province'] = $influencer->province;
 
-        } else if ($user->role === 'Customer') {
-
-            $customer = Customer::where('user_id', $user->id)->first();
-            $profileDetails['customer_card_num'] = $customer->customer_card_num;
-            $profileDetails['bdate'] = $customer->bdate;
-            $profileDetails['zip'] = $customer->zip;
-            $profileDetails['street'] = $customer->street;
-            $profileDetails['city'] = $customer->city;
-            $profileDetails['province'] = $customer->province;
-            $profileDetails['validity'] = $customer->validity;
-
         }
+
+        // else if ($user->role === 'Customer') {
+
+        //     $customer = Customer::where('user_id', $user->id)->first();
+        //     $profileDetails['customer_card_num'] = $customer->customer_card_num;
+        //     $profileDetails['bdate'] = $customer->bdate;
+        //     $profileDetails['zip'] = $customer->zip;
+        //     $profileDetails['street'] = $customer->street;
+        //     $profileDetails['city'] = $customer->city;
+        //     $profileDetails['province'] = $customer->province;
+        //     $profileDetails['validity'] = $customer->validity;
+
+        // }
 
 
         return $profileDetails;

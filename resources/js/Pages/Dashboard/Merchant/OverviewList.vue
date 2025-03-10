@@ -15,7 +15,7 @@
 
 <script>
 import Header from '@/Layout/Dashboard/header.vue';
-import Sidebar from '@/Layout/Dashboard/sidebar.vue';
+import Sidebar from '@/Layout/Sidebar/merchantSidebar.vue';
 import Content from '@/Layout/Dashboard/Merchant/Overview/content.vue';
 import SecondContent from '@/Layout/Dashboard/Merchant/Overview/content2.vue';
 

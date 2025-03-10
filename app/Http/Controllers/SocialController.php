@@ -53,8 +53,8 @@ class SocialController extends Controller
             Auth::login($user);
 
             // Redirect based on event
-            return $event && in_array($event, ['dcia1', 'dcia2']) 
-                ? redirect("/dcia?already_registered=$event") 
+            return $event && in_array($event, ['dcia1', 'dcia2'])
+                ? redirect("/dcia?already_registered=$event")
                 : redirect("/login");
 
         } catch (\Throwable $th) {
@@ -106,8 +106,8 @@ class SocialController extends Controller
             Auth::login($user);
 
             // Redirect based on event
-            return $event && in_array($event, ['dcia1', 'dcia2']) 
-                ? redirect("/dcia?already_registered=$event") 
+            return $event && in_array($event, ['dcia1', 'dcia2'])
+                ? redirect("/dcia?already_registered=$event")
                 : redirect("/login");
 
         } catch (\Throwable $th) {

@@ -44,7 +44,6 @@
                             <div class="flex flex-col md:flex-row md:justify-end md:items-center gap-0.5 md:gap-1">
                                 <a class="p-2 flex items-center text-sm bg-gray-100 text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 font-onest"
                                     href="/" aria-current="page">
-
                                     Our Solutions
                                 </a>
 
@@ -52,7 +51,6 @@
                                     href="/about-us">
                                     Grow With
                                 </a>
-
 
                                 <a class="p-2 flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 font-onest"
                                     href="/help/center">
@@ -63,9 +61,15 @@
 
                         <!-- Button Group -->
                         <div class="flex flex-wrap items-center gap-x-1.5">
-                            <a class="py-2 px-2.5 inline-flex items-center font-onest text-sm rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:bg-blue-600"
+                            <a v-if="!isAuthenticated"
+                                class="py-2 px-2.5 inline-flex items-center font-onest text-sm rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:bg-blue-600"
                                 href="/login">
                                 Login
+                            </a>
+                            <a v-else
+                                class="py-2 px-2.5 inline-flex items-center font-onest text-sm rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:bg-blue-600"
+                                href="/dashboard">
+                                Dashboard
                             </a>
                         </div>
                         <!-- End Button Group -->
@@ -77,3 +81,19 @@
     </header>
     <!-- ========== END HEADER ========== -->
 </template>
+
+<script>
+import { computed } from "vue";
+import { useAuthStore } from "@/stores/auth"; // Make sure you have an auth store
+
+export default {
+    setup() {
+        const authStore = useAuthStore();
+        const isAuthenticated = computed(() => authStore.isAuthenticated); // Check if user is logged in
+
+        return {
+            isAuthenticated
+        };
+    }
+};
+</script>

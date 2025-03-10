@@ -12,7 +12,7 @@
 
         <Filter />
     </div>
-    <Merchant :itemsPerPage="12" title="All Merchants" :showSeeMore="false"
+    <Merchant :itemsPerPage="12" title="All Merchants" :showSeeMore="false" :showPagination="true"
     @updateMerchantCount="merchantCount = $event" />
 
 

@@ -1,18 +1,14 @@
 <template>
-    <header class="flex justify-center items-center p-4 border-b border-gray-200  bg-white w-full">
-        <div class="flex items-center space-x-6 w-full max-w-3xl ">
+    <header class="flex justify-center items-center p-4 border-b border-gray-200 bg-white w-full">
+        <div class="flex items-center space-x-6 w-full max-w-3xl">
             <!-- Logo -->
             <router-link to="/">
-                <Logo class=" hidden md:flex w-20 h-13" />
+                <Logo class="hidden md:flex w-20 h-13" />
             </router-link>
 
             <!-- Mobile Menu Button (Hidden on Desktop) -->
             <button @click="toggleMenu" class="md:hidden p-2">
-
-                <span class="material-icons material-symbols-outlined w-6 h-6">
-                    lists
-                </span>
-
+                <span class="material-icons material-symbols-outlined w-6 h-6">lists</span>
             </button>
 
             <!-- Desktop Navigation (Visible on Desktop) -->
@@ -29,7 +25,9 @@
                     placeholder="Search for deals and discounts"
                     class="px-4 py-2 rounded-full bg-gray-100 text-gray-600 flex-1 max-w-lg">
 
-                <BaseButton name="blue" to="/login">Login</BaseButton>
+                <!-- Conditional Rendering -->
+                <BaseButton v-if="!isAuthenticated" name="blue" to="/login">Login</BaseButton>
+                <BaseButton v-else name="blue" to="/login">Dashboard</BaseButton>
             </div>
         </div>
 
@@ -47,7 +45,9 @@
             <input v-model="searchQuery" @keyup.enter="searchDiscount" type="text"
                 placeholder="Search for deals and discounts" class="px-4 py-2 rounded bg-gray-100 text-gray-600 w-full">
 
-            <BaseButton name="blue" to="/login">Login</BaseButton>
+            <!-- Conditional Rendering -->
+            <BaseButton v-if="!isAuthenticated" name="blue" to="/login">Login</BaseButton>
+            <BaseButton v-else name="blue" to="/login">Dashboard</BaseButton>
         </div>
     </header>
 
@@ -56,8 +56,9 @@
 </template>
 
 <script>
-import { ref, watch } from "vue";
+import { ref, computed, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useAuthStore } from "@/stores/auth"; // Make sure you have a Vuex or Pinia auth store
 import Logo from '@/Components/Atoms/Logo.vue';
 import BaseButton from '@/Components/Atoms/Button.vue';
 import LocationModal from '@/Components/Molecules/LocationModal.vue';
@@ -91,6 +92,10 @@ export default {
             searchQuery.value = newDiscount || '';
         }, { immediate: true });
 
+        // Auth Check (Replace with Vuex, Pinia, or Local Storage)
+        const authStore = useAuthStore();
+        const isAuthenticated = computed(() => authStore.isAuthenticated); // Check if user is logged in
+
         return {
             isModalOpen,
             openModal,
@@ -98,7 +103,8 @@ export default {
             searchQuery,
             searchDiscount,
             isMenuOpen,
-            toggleMenu
+            toggleMenu,
+            isAuthenticated
         };
     }
 };

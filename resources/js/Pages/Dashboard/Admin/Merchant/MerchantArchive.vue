@@ -38,7 +38,7 @@
 
 <script>
 import Header from '@/Layout/Dashboard/header.vue';
-import Sidebar from '@/Layout/Dashboard/sidebar.vue';
+import Sidebar from '@/Layout/Sidebar/adminSidebar.vue';
 import Table from '@/Layout/table.vue';
 import axios from 'axios';
 import Swal from 'sweetalert2';

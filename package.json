@@ -29,6 +29,7 @@
         "@preline/datatable": "^2.5.2",
         "@preline/stepper": "^2.5.2",
         "@tailwindcss/vite": "^4.0.5",
+        "@tinymce/tinymce-vue": "^6.1.0",
         "@vitejs/plugin-vue": "^5.0.4",
         "chart.js": "^4.4.7",
         "datatables.net-dt": "^2.2.2",

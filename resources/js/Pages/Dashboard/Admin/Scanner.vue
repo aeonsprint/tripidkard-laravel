@@ -21,7 +21,7 @@
                 <!-- Card Number Input -->
                 <div class="mt-4 text-center">
                     <input type="text" v-model="cardNumber" placeholder="CARD NUMBER"
-                        class="w-full px-4 py-2 border rounded-lg text-center" 
+                        class="w-full px-4 py-2 border rounded-lg text-center"
                         @input="handleInput" @keyup.enter="handleInput" />
                 </div>
 
@@ -30,7 +30,7 @@
                     <div id="my-qr-reader" class="scanner-overlay"></div>
                 </div>
 
-                
+
             </div>
 
         </div>
@@ -39,7 +39,7 @@
 
 <script>
 import Header from '@/Layout/Dashboard/header.vue';
-import Sidebar from '@/Layout/Dashboard/sidebar.vue';
+import Sidebar from '@/Layout/Sidebar/adminSidebar.vue';
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import { Html5QrcodeScanner } from 'html5-qrcode';

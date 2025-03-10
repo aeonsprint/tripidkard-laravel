@@ -6,8 +6,8 @@
     <Breadcrumb />
     <Banner />
     <Description />
+    <Merchant :itemsPerPage="4" title="Featured Merchants" :showSeeMore="true" :showPagination="true" />
 
-    <Merchant />
 
     <Footer />
 

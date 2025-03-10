@@ -45,7 +45,7 @@
 import { ref, computed, onMounted } from "vue";
 import { useRouter } from "vue-router"; // Import useRouter
 import Header from '@/Layout/Dashboard/header.vue';
-import Sidebar from '@/Layout/Dashboard/sidebar.vue';
+import Sidebar from '@/Layout/Sidebar/merchantSidebar.vue';
 import { useAuthStore } from "@/Stores/auth";
 import Swal from "sweetalert2";
 import { useRoute } from "vue-router";

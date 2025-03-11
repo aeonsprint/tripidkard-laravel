@@ -9,11 +9,20 @@ import { routesAdmin, routesMerchant, routesCustomer, routesDefault } from './ro
 import { createPinia } from 'pinia';
 import { useAuthStore } from './Stores/auth';
 
+// Import NProgress for loading indicator
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+
+// Create Vue Router
 const router = createRouter({
     routes: [...routesAdmin, ...routesMerchant, ...routesCustomer, ...routesDefault],
     history: createWebHistory(),
 });
+
+// Global Navigation Guards
 router.beforeEach(async (to, from, next) => {
+    NProgress.start();  // Start the progress bar
+
     const authStore = useAuthStore();
 
     // Load authUser from localStorage if not already set
@@ -61,8 +70,12 @@ router.beforeEach(async (to, from, next) => {
     next();
 });
 
+// Stop NProgress after navigation
+router.afterEach(() => {
+    NProgress.done();  // Stop the progress bar
+});
 
-
+// Create Vue App
 const app = createApp({});
 const pinia = createPinia();
 

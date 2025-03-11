@@ -4,6 +4,7 @@ import MerchantList from "./Pages/Dashboard/Admin/Merchant/MerchantList.vue";
 import MerchantPending from "./Pages/Dashboard/Admin/Merchant/MerchantPending.vue";
 import MerchantArchive from "./Pages/Dashboard/Admin/Merchant/MerchantArchive.vue";
 import CustomerList from "./Pages/Dashboard/Admin/Customer/CustomerList.vue";
+import CustomerPending from "./Pages/Dashboard/Admin/Customer/pending.vue";
 import CustomerArchive from "./Pages/Dashboard/Admin/Customer/CustomerArchive.vue";
 import MerchantRegister from "./Pages/Dashboard/Admin/Merchant/Register.vue";
 import CustomerRegister from "./Pages/Dashboard/Admin/Customer/Register.vue";
@@ -57,6 +58,7 @@ import JoinRaffle from "./Pages/Merchant/Raffle.vue";
 import RaffleDetails from "./Pages/Merchant/RaffleDetails.vue";
 import MerchantCenter from "./Pages/Merchant/Center.vue";
 import MerchantSignup from "./Pages/Merchant/SignUp.vue";
+import MerchantSignupTest from "./Pages/Merchant/register.vue";
 import CustomerSignup from "./Pages/Customer/Signup.vue";
 import DCIA from "./Pages/Dcia/DciaList.vue";
 import MerchantLogin from "./Pages/Login/Login.vue";
@@ -105,6 +107,19 @@ const routesAdmin = [
             requiresAdminAuth: true,
         },
     },
+
+
+    {
+        path: "/administrator/customer/pending",
+        name: "administrator.customer.pending",
+        component: CustomerPending,
+        meta: {
+            title: "Customer Pending",
+            breadcrumb: "administrator/customer/pending",
+            requiresAdminAuth: true,
+        },
+    },
+
 
     {
         path: "/administrator/customer/list",
@@ -511,6 +526,17 @@ const routesDefault = [
         meta: {
             title: "Merchant Page",
             breadcrumb: "Home/raffle/details",
+            requiresGuest: true,
+        },
+    },
+
+    {
+        path: "/merchant-signup",
+        name: "merchant-signup",
+        component: MerchantSignupTest,
+        meta: {
+            title: "Merchant Signup",
+            breadcrumb: "Home/Merchant/Signup",
             requiresGuest: true,
         },
     },

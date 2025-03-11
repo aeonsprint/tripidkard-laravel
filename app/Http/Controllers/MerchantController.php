@@ -52,6 +52,7 @@ class MerchantController extends Controller
             'users.avatar',
             'users.contact',
             'merchants.city',
+            'merchants.views',
             'merchants.province',
             DB::raw("CONCAT_WS(' ', COALESCE(users.fname, ''), COALESCE(users.mname, ''), COALESCE(users.lname, '')) AS merchant_name"),
             DB::raw("CONCAT_WS(', ', COALESCE(merchants.street, ''), COALESCE(merchants.city, ''), COALESCE(merchants.province, ''), COALESCE(merchants.zip, '')) AS address")
@@ -118,6 +119,7 @@ class MerchantController extends Controller
             'merchants.business_sub_category',
             'merchants.discount',
             'merchants.stars_points',
+            'merchants.views',
             'users.id AS user_id',
             'users.email',
             'users.contact',
@@ -175,6 +177,7 @@ class MerchantController extends Controller
             'merchants.business_sub_category',
             'merchants.discount',
             'merchants.stars_points',
+            'merchants.views',
             'users.id AS user_id',
             'users.email',
             'users.contact',

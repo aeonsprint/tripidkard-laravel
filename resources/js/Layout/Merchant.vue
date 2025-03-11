@@ -62,7 +62,7 @@
                                 <i class="fa fa-heart cursor-pointer" @click="toggleHeart(merchant)"
                                     :class="{'text-red-500': merchant.isHearted, 'text-gray-500': !merchant.isHearted}">
                                 </i>
-                                <span class="text-xs sm:text-sm text-gray-600">2.8k</span>
+                                <span class="text-xs sm:text-sm text-gray-600">{{ formatViews(merchant.views) }}</span>
                             </div>
                         </div>
                     </div>
@@ -190,4 +190,14 @@ const paginatedMerchants = computed(() => {
     const start = (currentPage.value - 1) * props.itemsPerPage;
     return filteredMerchants.value.slice(start, start + props.itemsPerPage);
 });
+
+const formatViews = (num) => {
+    if (num >= 1000000) {
+        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+    } else if (num >= 1000) {
+        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+    }
+    return num;
+};
+
 </script>

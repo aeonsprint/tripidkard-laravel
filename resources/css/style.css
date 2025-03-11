@@ -1,0 +1,14 @@
+/* Custom Progress Bar */
+#nprogress .bar {
+    background: blue !important;  /* Kulay ng progress bar */
+    height: 4px !important;       /* Mas makapal */
+  }
+
+  #nprogress .peg {
+    box-shadow: 0 0 10px blue, 0 0 5px blue !important;
+  }
+
+  #nprogress .spinner-icon {
+    border-top-color: blue !important;
+    border-left-color: blue !important;
+  }

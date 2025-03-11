@@ -120,6 +120,7 @@ Route::get('/api/customers', [CustomerController::class, 'index']);
 Route::get('/api/customers/archive', [CustomerController::class, 'indexArchive']);
 Route::get('/api/user/customers', [CustomerController::class, 'indexUser']);
 Route::get('/api/customer/{id}/points', [CustomerController::class, 'points']);
+Route::get('/api/customer/pending', [CustomerController::class, 'indexPending']);
 
 
 Route::post('/contact/send-email', [EmailController::class, 'sendContactUs']);

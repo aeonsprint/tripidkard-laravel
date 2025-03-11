@@ -43,7 +43,7 @@ class CustomerController extends Controller
                 'customers.customer_card_num',
                 'customers.zip',
                 'customers.city',
-                '.province',
+                'customers.province',
                 // Concatenate full name
                 DB::raw("CONCAT_WS(' ', COALESCE(users.fname, ''), COALESCE(users.mname, ''), COALESCE(users.lname, '')) AS customer_name"),
                 // Concatenate full address
@@ -65,6 +65,42 @@ class CustomerController extends Controller
                 $query->where("province", "like", "%{$province}%");
             })
             ->where('users.status', '=', '1')
+            ->get();
+
+        return response()->json($customers);
+    }
+
+
+    public function indexPending()
+    {
+        $searchFields = [
+            'users.fname',
+            'users.mname',
+            'users.lname',
+            'users.contact',
+            'users.email',
+        ];
+
+        $customers = Customer::query()
+            ->select([
+                'customers.id AS customer_id',
+                'users.id AS user_id',
+                'users.email',
+                'users.contact',
+                // Concatenate full name
+                DB::raw("CONCAT_WS(' ', COALESCE(users.fname, ''), COALESCE(users.mname, ''), COALESCE(users.lname, '')) AS customer_name"),
+                // Concatenate full address
+            ])
+            ->when(request('query'), function ($query, $searchQuery) use ($searchFields) {
+                $query->where(function ($query) use ($searchFields, $searchQuery) {
+                    foreach ($searchFields as $field) {
+                        $query->orWhere($field, 'like', "%{$searchQuery}%");
+                    }
+                });
+            })
+            ->where('status', '=', '1')
+
+
             ->get();
 
         return response()->json($customers);

@@ -35,6 +35,9 @@ class ProfileController extends Controller
             $profileDetails['street'] = $merchant->street;
             $profileDetails['city'] = $merchant->city;
             $profileDetails['province'] = $merchant->province;
+            $profileDetails['website'] = $merchant->website;
+            $profileDetails['facebook'] = $merchant->facebook;
+            $profileDetails['views'] = $merchant->views;
             $profileDetails['description'] = $merchant->description;
             $profileDetails['tagline'] = $merchant->tagline;
             $profileDetails['photo1'] = $merchant->photo1;

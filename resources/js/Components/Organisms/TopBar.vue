@@ -26,7 +26,7 @@
                     class="px-4 py-2 rounded-full bg-gray-100 text-gray-600 flex-1 max-w-lg">
 
                 <!-- Conditional Rendering -->
-                <BaseButton v-if="!isAuthenticated" name="blue" to="/login">Login</BaseButton>
+                <BaseButton v-if="!isAuthenticated" name="blue" to="/login">Merchant Login</BaseButton>
                 <BaseButton v-else name="blue" to="/login">Dashboard</BaseButton>
             </div>
         </div>
@@ -46,6 +46,7 @@
                 placeholder="Search for deals and discounts" class="px-4 py-2 rounded bg-gray-100 text-gray-600 w-full">
 
             <!-- Conditional Rendering -->
+            <BaseButton v-if="!isAuthenticated" name="blue" to="/login">Login</BaseButton>
             <BaseButton v-if="!isAuthenticated" name="blue" to="/login">Login</BaseButton>
             <BaseButton v-else name="blue" to="/login">Dashboard</BaseButton>
         </div>

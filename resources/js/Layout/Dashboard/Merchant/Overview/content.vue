@@ -20,7 +20,7 @@
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-3xl font-medium text-gray-800 dark:text-neutral-200">
-               20% OFF
+               {{ authStore.user.discount }}% OFF
               </h3>
             </div>
           </div>
@@ -44,7 +44,7 @@
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-3xl font-medium text-gray-800 dark:text-neutral-200">
-              1,234
+                {{ authStore.user.views }}
               </h3>
             </div>
           </div>
@@ -58,7 +58,7 @@
           <div class="p-4 md:p-5">
             <div class="flex items-center gap-x-2">
               <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-              Active Raffle
+                Likes / Hearts
               </p>
               <div class="hs-tooltip1">
                 <div class="hs-tooltip-toggle text-1xl text-blue-400">
@@ -69,7 +69,8 @@
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-3xl font-medium text-gray-800 dark:text-neutral-200">
-              2
+              {{ totalLikes }}
+
               </h3>
             </div>
           </div>
@@ -83,7 +84,7 @@
           <div class="p-4 md:p-5">
             <div class="flex items-center gap-x-2">
               <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-              Total Engagement
+                Bookmarks / Saves
               </p>
               <div class="hs-tooltip1">
                 <div class="hs-tooltip-toggle text-1xl text-blue-400">
@@ -94,7 +95,8 @@
 
             <div class="mt-1 flex items-center gap-x-2">
               <h3 class="text-xl sm:text-3xl font-medium text-gray-800 dark:text-neutral-200">
-              1,234
+              <!-- total bookmark -->
+              {{ totalBookmarks }}
               </h3>
             </div>
           </div>
@@ -104,6 +106,47 @@
       </div>
       <!-- End Grid -->
 
-
-
 </template>
+<script>
+import { useAuthStore } from "@/Stores/auth";
+import { ref, onMounted } from "vue";
+import axios from "axios";
+
+export default {
+    setup() {
+        const authStore = useAuthStore();
+        const totalBookmarks = ref(0);
+        const totalLikes = ref(0);
+
+        const countBookmarks = async () => {
+            try {
+                const response = await axios.get("/api/bookmarks/count");
+                totalBookmarks.value = response.data.totalBookmarks;
+            } catch (error) {
+                console.error("Error Count bookmarks:", error);
+            }
+        };
+
+        const countlikes = async () => {
+            try {
+                const response = await axios.get("/api/likes/count");
+                totalLikes.value = response.data.totalLikes;
+            } catch (error) {
+                console.error("Error Count Likes:", error);
+            }
+        };
+
+        onMounted(() => {
+            countBookmarks();
+            countlikes();
+        });
+
+        return {
+            authStore,
+            totalBookmarks,
+            totalLikes
+
+        };
+    },
+};
+</script>

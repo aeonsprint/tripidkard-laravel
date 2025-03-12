@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\QrcodeController;
 use App\Http\Controllers\RaffleController;
@@ -139,7 +140,7 @@ Route::get('/api/raffles', [RaffleController::class, 'index']);
 Route::get('/api/raffles/{id}/edit', [RaffleController::class, 'raffleEdit']);
 Route::get('/api/raffles/{id}/show', [RaffleController::class, 'raffleShow']);
 Route::post('/api/raffles/join', [RaffleDrawController::class, 'joinRaffle']);
-Route::get('/api/raffles/{id}/participants', [RaffleDrawController::class, 'getRaffleParticipants']);
+Route::get('/api//api/bookmarks/{id}/participants', [RaffleDrawController::class, 'getRaffleParticipants']);
 
 
 Route::get('/auth/google', [SocialController::class, 'redirectGoogle'])->name('google-auth');
@@ -149,9 +150,15 @@ Route::get('auth/facebook', [SocialController::class, 'redirectFacebook']);
 // Route to handle the callback from Facebook after authentication
 Route::get('/facebook/callback', [SocialController::class, 'callbackFacebook']);
 
-Route::get('/api//bookmarks', [BookmarkController::class, 'index']); // Fetch user's bookmarks
-Route::post('/api//bookmarks', [BookmarkController::class, 'store']); // Add bookmark
-Route::delete('/api/bookmarks/{merchant_id}', [BookmarkController::class, 'destroy']); // Remove bookmark
+Route::get('/api/bookmarks', [BookmarkController::class, 'index']);
+Route::get('/api/bookmarks/count', [BookmarkController::class, 'count']);
+Route::post('/api/bookmarks', [BookmarkController::class, 'store']);
+Route::delete('/api/bookmarks/{merchant_id}', [BookmarkController::class, 'destroy']);
+
+Route::get('/api/likes', [LikeController::class, 'index']);
+Route::get('/api/likes/count', [LikeController::class, 'count']);
+Route::post('/api/likes', [LikeController::class, 'store']);
+Route::delete('/api/likes/{merchant_id}', [LikeController::class, 'destroy']);
 
 Route::get('{view}', ApplicationController::class)->where('view', '(.*)');
 

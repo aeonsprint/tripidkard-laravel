@@ -25,7 +25,7 @@
             <!-- End Header -->
             <div class="mt-1 py-5 px-6  flex flex-col  items-start gap-x-2 bg-[#f0f6ff]  rounded-lg">
                 <h3 class="text-xl sm:text-4xl font-medium text-blue-800 dark:text-neutral-200">
-                    20% OFF
+                    {{ authStore.user.discount }}% OFF
                 </h3>
                 <p class="mt-1 text-gray-500 dark:text-neutral-400">
                     on all product and services
@@ -36,17 +36,16 @@
             <!-- End  -->
 
             <!-- start  -->
-            <div class="p-4 md:p-2 flex flex-col">
+            <!-- <div class="p-4 md:p-2 flex flex-col">
                 <h3 class="text-2lg font-bold text-gray-800 dark:text-white">
                     Valid Until
                 </h3>
 
                 <p class="mt-1 text-gray-500 dark:text-neutral-400">
-                    <!-- callendar -->
                     January, 29, 2026
                 </p>
 
-            </div>
+            </div> -->
 
 
             <!-- end -->
@@ -70,16 +69,22 @@
             <!-- End Header -->
             <div class="mt-3 py-5 px-6 border flex flex-col  items-start gap-x-2 rounded-lg">
 
-                <div class="mb-2 flex flex-col ">
-                    <h3 class="text-1sm font-semibold text-gray-800 dark:text-white">Holiday Raffle</h3>
-                    <span class="text-sm text-gray-500 dark:text-white">Ends 3 days</span>
+                <div class="mb-2 flex flex-col " >
+
+                    <div v-for="raffle in activeRaffles" :key="raffle.id" >
+
+                    <h3 class="text-1sm font-semibold text-gray-800 dark:text-white">{{ raffle.title }}</h3>
+                    <span class="text-sm text-gray-500 dark:text-white"> {{ raffle.draw_date  }} Ends 3 days</span>
                 </div>
+            </div>
 
                 <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700"
                     role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                     <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
                         style="width: 25%"></div>
                 </div>
+
+
                 <div class="mb-2 flex flex-col ">
                     <span class="text-sm text-gray-500 dark:text-white">750 Participants</span>
                 </div>
@@ -90,7 +95,7 @@
             <!-- End  -->
 
             <!-- End Header -->
-            <div class="mt-3 py-5 px-6 border flex flex-col  items-start gap-x-2 rounded-lg">
+            <!-- <div class="mt-3 py-5 px-6 border flex flex-col  items-start gap-x-2 rounded-lg">
 
                 <div class="mb-2 flex flex-col ">
                     <h3 class="text-1sm font-semibold text-gray-800 dark:text-white">Weekend Flash Sale</h3>
@@ -98,12 +103,64 @@
                     <span class=" mt-2 text-sm text-gray-500 dark:text-white">30% OFF on all Servicxes</span>
 
                 </div>
-                <!-- End Progress -->
 
-            </div>
+            </div> -->
         </div>
         <!-- End Card -->
     </div>
 
 
 </template>
+
+<script>
+import { useAuthStore } from "@/Stores/auth";
+import { ref, computed, onMounted } from "vue";
+import axios from "axios";
+
+export default {
+    setup() {
+        const authStore = useAuthStore();
+        const raffles = ref([]);
+        const participants = ref([]);
+
+        // Computed property para sa active raffles
+        const activeRaffles = computed(() => {
+            return raffles.value.filter(raffle => raffle.status === 0);
+        });
+
+        // Fetch raffles function
+        const fetchRaffles = async () => {
+            try {
+                const response = await axios.get('/api/raffles');
+                raffles.value = response.data;
+
+                // Fetch participants kung may raffle na
+                if (raffles.value.length > 0) {
+                    fetchParticipants(raffles.value[0].id);
+                }
+            } catch (error) {
+                console.error("Error fetching raffles:", error);
+            }
+        };
+
+        // Fetch participants function
+        const fetchParticipants = async (raffleId) => {
+            try {
+                const response = await axios.get(`/api/raffles/${raffleId}/participants`);
+                participants.value = response.data;
+            } catch (error) {
+                console.error("Error fetching participants:", error);
+            }
+        };
+
+        onMounted(fetchRaffles);
+
+        return {
+            authStore,
+            raffles,
+            participants,
+            activeRaffles,
+        };
+    }
+};
+</script>

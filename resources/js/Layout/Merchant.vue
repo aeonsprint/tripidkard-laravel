@@ -26,27 +26,27 @@
                 <div class="relative bg-white border rounded-xl shadow-sm overflow-hidden flex flex-col h-full">
                     <div class="relative">
                         <a :href="`/merchant/page/${merchant.merchant_id}`">
-                            <img
-                                :src="merchant.avatar ? `/storage/${merchant.avatar}` : '/storage/img/logo.jpg'"
-                                class="w-full h-40 sm:h-48 md:h-56 object-cover"
-                                alt="Merchant Avatar"
-                            />
-                            <span v-if="merchant.discount" class="absolute top-2 left-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">
+                            <img :src="merchant.avatar ? `/storage/${merchant.avatar}` : '/storage/img/logo.jpg'"
+                                class="w-full h-40 sm:h-48 md:h-56 object-cover" alt="Merchant Avatar" />
+                            <span v-if="merchant.discount"
+                                class="absolute top-2 left-2 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">
                                 -{{ merchant.discount }}%
                             </span>
                         </a>
 
                         <!-- 🛠️ Move the bookmark button outside the <a> tag and add @click.stop -->
-                        <button @click.stop="toggleBookmark(merchant)" class="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md">
+                        <button @click.stop="toggleBookmark(merchant)"
+                            class="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md">
                             <i class="fa fa-bookmark text-xl"
-                                :class="{'text-yellow-500': merchant.isBookmarked, 'text-gray-500': !merchant.isBookmarked}">
+                                :class="{ 'text-yellow-500': merchant.isBookmarked, 'text-gray-500': !merchant.isBookmarked }">
                             </i>
                         </button>
                     </div>
 
                     <div class="p-4 flex flex-col flex-grow">
                         <a :href="`/merchant/page/${merchant.merchant_id}`" class="text-black">
-                            <h5 class="font-bold text-gray-900 text-sm sm:text-base">{{ merchant.business_name || 'Unknown Merchant' }}</h5>
+                            <h5 class="font-bold text-gray-900 text-sm sm:text-base">{{ merchant.business_name ||
+                                'Unknown Merchant' }}</h5>
                         </a>
 
                         <p class="text-xs sm:text-sm text-gray-600 flex items-center mt-1 min-h-[40px]">
@@ -56,11 +56,12 @@
 
                         <div class="flex justify-between items-center border-t pt-2 text-dark mt-2 flex-grow">
                             <span class="text-xs sm:text-sm text-gray-500">
-                                {{ merchant.business_category || 'No Category' }} > {{ merchant.business_sub_category || 'No Subcategory' }}
+                                {{ merchant.business_category || 'No Category' }} > {{ merchant.business_sub_category ||
+                                'No Subcategory' }}
                             </span>
                             <div class="flex items-center space-x-2">
                                 <i class="fa fa-heart cursor-pointer" @click="toggleHeart(merchant)"
-                                    :class="{'text-red-500': merchant.isHearted, 'text-gray-500': !merchant.isHearted}">
+                                    :class="{ 'text-red-500': merchant.isHearted, 'text-gray-500': !merchant.isHearted }">
                                 </i>
                                 <span class="text-xs sm:text-sm text-gray-600">{{ formatViews(merchant.views) }}</span>
                             </div>
@@ -71,14 +72,15 @@
         </div>
 
         <!-- Pagination -->
-        <div  v-if="showPagination && isMerchantListPage" class="flex justify-center sm:justify-end items-center mt-4 bg-white p-2 rounded-lg">
+        <div v-if="showPagination && isMerchantListPage"
+            class="flex justify-center sm:justify-end items-center mt-4 bg-white p-2 rounded-lg">
             <button :disabled="currentPage === 1" @click="currentPage--"
                 class="bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-blue-500 hover:text-white disabled:bg-gray-300 disabled:text-gray-500">
                 Previous
             </button>
             <div class="flex justify-center items-center mx-2 sm:mx-4">
                 <span v-for="page in totalPages" :key="page"
-                    :class="{'bg-blue-500 text-white': currentPage === page, 'bg-white text-blue-500': currentPage !== page}"
+                    :class="{ 'bg-blue-500 text-white': currentPage === page, 'bg-white text-blue-500': currentPage !== page }"
                     @click="currentPage = page" class="cursor-pointer px-2 sm:px-4 py-1 sm:py-2 mx-1 rounded-lg">
                     {{ page }}
                 </span>
@@ -95,6 +97,7 @@
 import axios from "axios";
 import { ref, computed, onMounted, watch, defineEmits, defineProps } from "vue";
 import { useRoute } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 
 const props = defineProps({
     itemsPerPage: { type: Number, default: 20 },
@@ -111,16 +114,27 @@ const searchQuery = ref(route.query.discount || "");
 const currentPage = ref(1);
 const user = ref(null);
 const bookmarkedMerchants = ref(new Set());
+const likedMerchants = ref(new Set());
+const authStore = useAuthStore();
 
-const getUser = async () => {
+
+const getUserLikes = async () => {
+    if (!user.value) return;
+
     try {
-        const response = await axios.get("/api/user");
-        user.value = response.data;
-        getUserBookmarks();
+        const response = await axios.get("/api/likes");
+        likedMerchants.value = new Set(response.data.map(like => like.merchant_id));
+
+        // Update each merchant's isHearted status
+        merchants.value.forEach(merchant => {
+            merchant.isHearted = likedMerchants.value.has(merchant.merchant_id);
+        });
     } catch (error) {
-        user.value = null;
+        console.error("Error fetching likes:", error);
     }
 };
+
+
 
 const getUserBookmarks = async () => {
     if (!user.value) return;
@@ -159,6 +173,27 @@ const getMerchants = async () => {
     }
 };
 
+const toggleHeart = async (merchant) => {
+    if (!user.value) {
+        return (window.location.href = "/login");
+    }
+
+    try {
+        if (merchant.isHearted) {
+            await axios.delete(`/api/likes/${merchant.merchant_id}`);
+            likedMerchants.value.delete(merchant.merchant_id);
+        } else {
+            await axios.post("/api/likes", { merchant_id: merchant.merchant_id });
+            likedMerchants.value.add(merchant.merchant_id);
+        }
+
+        merchant.isHearted = !merchant.isHearted;
+    } catch (error) {
+        console.error("Error toggling heart:", error);
+    }
+};
+
+
 const toggleBookmark = async (merchant) => {
     if (!user.value) {
         return (window.location.href = "/login");
@@ -180,7 +215,8 @@ const toggleBookmark = async (merchant) => {
 };
 
 onMounted(() => {
-    getUser();
+    authStore.getUser();
+    user.value = authStore.user;
     getMerchants();
 });
 

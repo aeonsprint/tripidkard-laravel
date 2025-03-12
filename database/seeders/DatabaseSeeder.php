@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             LocationSeeder::class,
             InfluencerSeeder::class,
             ImageBackgroundSeeder::class,
+            LogoSeeder::class,
         ]);
     }
 }

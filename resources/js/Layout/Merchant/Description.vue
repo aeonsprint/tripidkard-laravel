@@ -31,10 +31,10 @@
                     <!-- Raffle Details -->
                     <div class="p-4 flex flex-col justify-between w-2/3">
                         <h6 class="text-gray-900 text-md font-bold">
-                            {{ raffle.description || "No Title Available" }}
+                            {{ raffle.title || "No Title Available" }}
                         </h6>
                         <p class="text-gray-500 text-sm">
-                            Promo ends until {{ raffle.end_date || "N/A" }}
+                            Entries Deadline {{ raffle.entries_deadline || "N/A" }}
                         </p>
 
                         <!-- Join Now Button -->

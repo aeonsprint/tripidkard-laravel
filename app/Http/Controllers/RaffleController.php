@@ -21,6 +21,14 @@ class RaffleController extends Controller
         return response()->json($raffles);
     }
 
+    public function indexMerchant(Request $request)
+    {
+        $user = $request->user(); // Kunin ang authenticated user
+
+        $raffles = Raffle::where('user_id', $user->id)->get();
+
+        return response()->json($raffles);
+    }
 
     /**
      * Show the form for creating a new resource.

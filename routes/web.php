@@ -150,6 +150,8 @@ Route::get('auth/facebook', [SocialController::class, 'redirectFacebook']);
 // Route to handle the callback from Facebook after authentication
 Route::get('/facebook/callback', [SocialController::class, 'callbackFacebook']);
 
+
+Route::get('/api/merchant/bookmarks', [BookmarkController::class, 'indexMerchant']);
 Route::get('/api/bookmarks', [BookmarkController::class, 'index']);
 Route::get('/api/bookmarks/count', [BookmarkController::class, 'count']);
 Route::post('/api/bookmarks', [BookmarkController::class, 'store']);

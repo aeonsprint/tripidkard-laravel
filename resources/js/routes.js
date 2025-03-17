@@ -44,6 +44,8 @@ import CustomerDiscount from "./Pages/Dashboard/Customer/DiscountList.vue";
 import CustomerRaffle from "./Pages/Dashboard/Customer/RaffleList.vue";
 import CustomerCollection from "./Pages/Dashboard/Customer/CollectionList.vue";
 import CustomerLog from "./Pages/Dashboard/Customer/ActivityLogList.vue";
+import QrCode from "./Pages/Dashboard/Customer/QrCode.vue";
+
 // import OrdeLists from './Pages/Merchant/Orders/list.vue';
 
 
@@ -323,7 +325,16 @@ const routesCustomer = [
             requiresCustomerAuth: true,
         },
     },
-
+    {
+        path: "/customer/qr-code/",
+        name: "customer.qr-code",
+        component: QrCode,
+        meta: {
+            title: "Customer QR Code",
+            breadcrumb: "/customer/qr-code/",
+            requiresCustomerAuth: true,
+        },
+    },
     {
         path: "/customer/activity-log/",
         name: "customer.activity-log",

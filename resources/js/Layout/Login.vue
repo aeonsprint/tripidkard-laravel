@@ -43,7 +43,7 @@
 
                                 <div class="mt-5">
                                     <button type="submit" :disabled="loading"
-                                        class="w-full py-3 px-4 text-sm font-medium rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:ring focus:ring-blue-300 disabled:opacity-50">
+                                        class="w-full py-3 px-4 text-l font-medium rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:ring focus:ring-blue-300 disabled:opacity-50">
                                         {{ loading ? 'Loading...' : 'Log In' }}
                                     </button>
                                 </div>
@@ -55,17 +55,19 @@
                                     </a>
                                 </p>
 
-                                <button @click.prevent="handleGoogleAuth" :disabled="loadingGoogle"
-                                    class="w-full bg-red-600 text-white border border-red-600 py-3 rounded-lg mb-2 flex items-center justify-center gap-2 hover:bg-white hover:text-red-600">
-                                    <GoogleIcon class="w-5 h-5" />
-                                    {{ loadingGoogle ? 'Loading...' : 'Sign Up with Google' }}
-                                </button>
+                                <div class="flex gap-4">
+                                    <button type="button" @click.prevent="handleGoogleAuth" :disabled="loadingGoogle"
+                                    class="w-full  text-gray-800 text-sm font-medium  border border-red-600 py-3 rounded-lg flex items-center justify-center gap-2 bg-white hover:text-red-600">
 
-                                <button @click.prevent="handleFacebookAuth" :disabled="loadingFacebook"
-                                    class="w-full bg-blue-600 text-white border border-blue-600 py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-white hover:text-blue-600">
-                                    <FacebookIcon class="w-5 h-5" />
-                                    {{ loadingFacebook ? 'Loading...' : 'Sign Up with Facebook' }}
-                                </button>
+                                        <GoogleIcon class="w-5 h-5" />
+                                        {{ loadingGoogle ? 'Loading...' : 'Sign Up with Google' }}
+                                    </button>
+                                    <button type="button" click.prevent="handleFacebookAuth" :disabled="loadingFacebook"
+                                    class="w-full  text-gray-800 text-sm font-medium  border border-blue-600 py-3 rounded-lg flex items-center justify-center gap-2 bg-white hover:text-blue-600">
+                                        <FacebookIcon class="w-5 h-5" />
+                                        {{ loadingFacebook ? 'Loading...' : 'Sign Up with Facebook' }}
+                                    </button>
+                                </div>
 
 
 
@@ -82,6 +84,8 @@
 import { reactive, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/Stores/auth';
+import GoogleIcon from '@/Components/Atoms/svg/google.vue';
+import FacebookIcon from '@/Components/Atoms/svg/facebook.vue';
 
 const authStore = useAuthStore();
 const router = useRouter();

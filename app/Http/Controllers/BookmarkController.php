@@ -15,22 +15,46 @@ class BookmarkController extends Controller
         return response()->json($bookmarks);
     }
 
-public function count()
-{
-    $user = request()->user();
 
-    // Kunin ang merchant record gamit ang user_id
-    $merchant = Merchant::where('user_id', $user->id)->first();
+    public function indexMerchant()
+    {
+        $bookmarks = Bookmark::where('bookmarks.user_id', Auth::id())
+            ->leftJoin('merchants', 'bookmarks.merchant_id', '=', 'merchants.id')
+            ->select(
+                'bookmarks.merchant_id',
+                'merchants.business_name',
+                'merchants.business_category',
+                'merchants.business_sub_category',
+                'merchants.discount',
+                'merchants.street',
+                'merchants.city',
+                'merchants.province',
+                'merchants.website',
+                'merchants.facebook',
+                'merchants.logo'
+            )
+            ->get();
 
-    if (!$merchant) {
-        return response()->json(['error' => 'Merchant not found'], 404);
+        return response()->json($bookmarks);
     }
 
-    // I-filter ang bookmarks gamit ang merchant_id
-    $totalBookmarks = Bookmark::where('merchant_id', $merchant->id)->count();
 
-    return response()->json(['totalBookmarks' => $totalBookmarks]);
-}
+    public function count()
+    {
+        $user = request()->user();
+
+        // Kunin ang merchant record gamit ang user_id
+        $merchant = Merchant::where('user_id', $user->id)->first();
+
+        if (!$merchant) {
+            return response()->json(['error' => 'Merchant not found'], 404);
+        }
+
+        // I-filter ang bookmarks gamit ang merchant_id
+        $totalBookmarks = Bookmark::where('merchant_id', $merchant->id)->count();
+
+        return response()->json(['totalBookmarks' => $totalBookmarks]);
+    }
 
 
     public function store(Request $request)

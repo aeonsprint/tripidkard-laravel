@@ -80,6 +80,40 @@ export const useAuthStore = defineStore("auth", {
             }
         },
 
+
+        async customerLoginForm(data) {
+            await this.getToken();
+            try {
+                const response = await axios.post("/customer/login", {
+                    email: data.email,
+                    password: data.password,
+                });
+
+                // Handle if user is inactive or has Admin role
+                if (response.data.message) {
+                    return { general: response.data.message };
+                }
+
+                // If no error, set the authenticated user
+                this.authUser = response.data.user;
+                localStorage.setItem("authUser", JSON.stringify(this.authUser));
+
+                return null; // No errors
+            } catch (error) {
+                console.error("Error logging in:", error);
+
+                if (error.response && error.response.status === 403) {
+                    return { general: error.response.data.message };
+                }
+
+                if (error.response && error.response.data.errors) {
+                    return error.response.data.errors;
+                } else {
+                    return { general: "An error occurred during login." };
+                }
+            }
+        },
+
         async adminLoginForm(data) {
             await this.getToken();
             try {

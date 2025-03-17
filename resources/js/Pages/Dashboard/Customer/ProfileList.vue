@@ -1,9 +1,8 @@
 <template>
-    <TopBar />
-    <div class="flex w-full  bg-[#f7f9fa]">
-        <!-- Sidebar -->
-
-        <Sidebar />
+   <TopBar />
+    <div class="flex w-full lg:ps-20 max-w-[80rem] bg-[#f7f9fa]">
+      <!-- Sidebar -->
+      <Sidebar />
         <!-- Main Content -->
         <div class="w-full  bg-[#f7f9fa]">
 

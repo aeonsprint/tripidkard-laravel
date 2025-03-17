@@ -80,7 +80,7 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
 
         // Check if the authenticated user has a status of 1
-        if ($user->status !== 1) {
+        if ($user->status !== 1|| $user->role !== 'Merchant') {
             // Log the activity for inactive user login attempt
 
             Auth::logout();
@@ -88,6 +88,39 @@ class AuthenticatedSessionController extends Controller
                 'message' => 'Your account is not active. Please contact support.',
             ], 403); // 403 Forbidden
         }
+
+        // Regenerate the session to avoid session fixation
+        $request->session()->regenerate();
+
+        // Log successful login activity
+
+        $name = $user->fname. ' '.$user->mname. ' '.$user->lname. ' ';
+        activity()
+            ->causedBy($user)
+            ->withProperties(['role' => $user->role, 'status' => $user->status])
+            ->log("$name successfully logged in.");
+        // Return the authenticated user data
+        return response()->json([
+            'user' => $user,
+        ]);
+    }
+
+    public function storeCustomer(LoginRequest $request): Response
+    {
+        // Authenticate the user
+        $request->authenticate();
+
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Check if the authenticated user has a status of 1
+        if ($user->status !== 1 || $user->role !== 'Customer') {
+            // Log the activity for inactive user login attempt
+
+            Auth::logout();
+            return response()->json([
+                'message' => 'Your account is not active. Please contact support.',
+            ], 403); // 403 Forbidden
 
         // Regenerate the session to avoid session fixation
         $request->session()->regenerate();

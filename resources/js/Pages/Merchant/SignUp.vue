@@ -106,7 +106,7 @@ import { useRouter } from 'vue-router';
 
 export default {
     components: { MenuBar, Stepper },
-    
+
     setup() {
         const router = useRouter();
 
@@ -146,7 +146,7 @@ export default {
                 'Others': []
             },
             subCategories: [],
-            
+
             merchantData: {
                 // User Information
                 fname: '',

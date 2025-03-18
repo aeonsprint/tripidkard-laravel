@@ -53,7 +53,7 @@ export default {
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     await authStore.logout();
-                    router.push("/login");
+                    router.push("/customer/signup");
                     setTimeout(() => {
                         window.location.reload();
                     }, 100);

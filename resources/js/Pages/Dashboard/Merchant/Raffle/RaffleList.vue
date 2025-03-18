@@ -87,13 +87,6 @@ export default {
         { label: 'Age', key: 'age' },
         { label: 'Address', key: 'address' }
       ],
-      tableData: [
-        { name: 'John Doe', age: 28, address: '123 Main St, New York' },
-        { name: 'Jane Smith', age: 34, address: '456 Elm St, California' },
-        { name: 'Michael Johnson', age: 40, address: '789 Pine St, Texas' },
-        { name: 'Sarah Brown', age: 25, address: '101 Maple St, Florida' },
-        { name: 'Chris Evans', age: 30, address: '222 Oak St, Chicago' }
-      ],
       participantColumns: [
         { label: 'Customer Name', key: 'customer_name' },
         { label: 'Joined Date', key: 'joined_at' }

@@ -15,6 +15,7 @@ use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\RaffleDrawController;
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\SocialLoginController;
 
 // Route::get('/welcome', function () {
 //     return view('welcome');
@@ -144,9 +145,18 @@ Route::get('/api//api/bookmarks/{id}/participants', [RaffleDrawController::class
 
 
 Route::get('/auth/google', [SocialController::class, 'redirectGoogle'])->name('google-auth');
-Route::get('/auth/google-callback', [SocialController::class, 'callbackGoogle']);
+Route::get('/auth/google-callback', [SocialController::class, 'callbackGoogle/Customer']);
+
+Route::get('/auth/user/google', [SocialLoginController::class, 'redirectGoogle'])->name('google-auth');
+Route::get('/auth/google-callback', [SocialLoginController::class, 'callbackGoogleUser']);
+
+Route::get('auth/facebook', action: [SocialController::class, 'redirectFacebook']);
+Route::get('auth/user/facebook', [SocialLoginController::class, 'redirectFacebook']);
+Route::get('/facebook/callback', [SocialLoginController::class, 'callbackFacebookUser']);
+
 
 Route::get('auth/facebook', [SocialController::class, 'redirectFacebook']);
+
 // Route to handle the callback from Facebook after authentication
 Route::get('/facebook/callback', [SocialController::class, 'callbackFacebook']);
 

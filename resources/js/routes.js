@@ -561,16 +561,7 @@ const routesDefault = [
             requiresGuest: true,
         },
     },
-    {
-        path: "/customer/signup",
-        name: "customer.signup",
-        component: CustomerSignup,
-        meta: {
-            title: "Customer Signup",
-            breadcrumb: "Home/Customer/Signup",
-            requiresGuest: true,
-        },
-    },
+
     {
         path: "/dcia",
         name: "dcia",
@@ -593,6 +584,18 @@ const routesDefault = [
 
 
     },
+
+    {
+        path: "/customer/signup",
+        name: "customer.signup",
+        component: CustomerSignup,
+        meta: {
+            title: "Customer Signup",
+            breadcrumb: "Home/Customer/Signup",
+            requiresGuest: true,
+        },
+    },
+
 
     {
         path: "/admin/login",

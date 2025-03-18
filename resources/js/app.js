@@ -41,7 +41,11 @@ router.beforeEach(async (to, from, next) => {
     const user = authStore.authUser;
 
     // Prevent logged-in users from accessing the login page
-    if (user && authStore.isAuthenticated && to.path === '/login') {
+    if (
+        user &&
+        authStore.isAuthenticated &&
+        (to.path === '/login' || to.path === '/customer/signup/' || to.path === '/customer/signup' || to.path === '/admin/login' || to.path === '/merchant/signup/')
+    ) {
         if (user.role === 'Admin') {
             return next({ path: '/administrator/dashboard' });
         } else if (user.role === 'Merchant') {
@@ -55,11 +59,11 @@ router.beforeEach(async (to, from, next) => {
 
     if (to.matched.some(record => record.meta.requiresAdminAuth)) {
         if (!user || !authStore.isAuthenticated || user.role !== 'Admin') {
-            return next({ path: '/login' });
+            return next({ path: '/admin/login' });
         }
     } else if (to.matched.some(record => record.meta.requiresCustomerAuth)) {
         if (!user || !authStore.isAuthenticated || user.role !== 'Customer') {
-            return next({ path: '/login' });
+            return next({ path: '/customer/signup' });
         }
     } else if (to.matched.some(record => record.meta.requiresMerchantAuth)) {
         if (!user || !authStore.isAuthenticated || user.role !== 'Merchant') {

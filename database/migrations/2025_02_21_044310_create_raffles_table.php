@@ -21,7 +21,8 @@ return new class extends Migration
             $table->date('entries_deadline');
             $table->date('draw_date');
             $table->string('image')->nullable();
-            $table->integer('status')->default(0); // 0 = inactive, 1 = active
+            $table->integer('status')->default(0);
+
 
             $table->timestamps();
         });

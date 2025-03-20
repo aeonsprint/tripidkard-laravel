@@ -15,11 +15,7 @@
                                 class="flex items-center text-green-600 hover:text-green-800 bg-transparent border-2 border-green-600 px-4 py-2 rounded-lg ms-2">
                                 <i class="fas fa-check mr-2"></i> Approve
                             </button>
-                            <!-- Archive Button -->
-                            <button @click="confirmAction(row.id, 'archive')"
-                                class="flex items-center text-red-600 hover:text-red-800 bg-transparent border-2 border-red-600 px-4 py-2 rounded-lg ms-2">
-                                <i class="fas fa-archive mr-2"></i> Archive
-                            </button>
+
                         </div>
                     </template>
                 </Table>
@@ -56,8 +52,9 @@ export default {
         };
     },
     computed: {
+        // Filter raffles with status = 0
         activeRaffles() {
-            return this.raffles.filter(raffle => raffle.status === 1);
+            return this.raffles.filter(raffle => raffle.status === 5);
         }
     },
     methods: {

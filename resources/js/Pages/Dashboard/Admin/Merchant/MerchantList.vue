@@ -88,7 +88,7 @@ export default {
         },
 
         goToEdit(userId) {
-            this.$router.push(`/merchants/edit/${userId}`);
+            this.$router.push(`/administrator/merchant/edit/${userId}`);
         },
 
         // Confirm archive action with SweetAlert2

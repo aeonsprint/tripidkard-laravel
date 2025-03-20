@@ -16,10 +16,11 @@ class RaffleController extends Controller
     {
         $user = $request->user(); // Kunin ang authenticated user
 
-        $raffles = Raffle::where('user_id', $user->id)->get();
-
+        $raffles = Raffle::get();
         return response()->json($raffles);
     }
+
+
 
     public function indexMerchant(Request $request)
     {
@@ -30,17 +31,21 @@ class RaffleController extends Controller
         return response()->json($raffles);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+
+    public function updateStatus(Request $request, $id)
     {
-        //
+        $raffle = Raffle::find($id);
+
+        if (!$raffle) {
+            return response()->json(['error' => 'Raffle not found'], 404);
+        }
+
+        $raffle->status = $request->status;
+        $raffle->save();
+
+        return response()->json(['message' => 'Status updated successfully']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $user = $request->user(); // Kunin ang authenticated user

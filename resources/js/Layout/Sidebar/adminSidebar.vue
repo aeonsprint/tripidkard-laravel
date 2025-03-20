@@ -47,90 +47,129 @@ bg-white border-e border-gray-200 dark:bg-neutral-800 dark:border-neutral-700" r
                         <ul class="space-y-1">
 
                             <!-- Dashboard -->
-                            <li class="hs-accordion" id="account-accordion">
+                            <li class="hs-accordion" id="dashboard-accordion">
                                 <button type="button"
-                                    class="hs-accordion-toggle w-full text-start flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hs-accordion-active:text-white dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
-                                    aria-expanded="true" aria-controls="account-accordion-sub-1-collapse-1">
-                                    <span class="material-icons  material-symbols-outlined ">home</span>
+                                    class="hs-accordion-toggle w-full text-start flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300"
+                                    :class="{ 'hs-accordion-active': isDashboardActive }" aria-expanded="true"
+                                    aria-controls="dashboard-accordion-collapse">
+                                    <span class="material-icons">home</span>
                                     Dashboard
-
-                                    <span
-                                        class="material-icons material-symbols-outlined ms-auto  text-gray-600 group-hover:text-gray-500 dark:text-neutral-400">keyboard_arrow_right</span>
+                                    <span class="material-icons ms-auto">keyboard_arrow_right</span>
                                 </button>
 
-                                <div id="account-accordion-sub-1-collapse-1"
-                                    class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
-                                    role="region" aria-labelledby="account-accordion">
+                                <div id="dashboard-accordion-collapse"
+                                    class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+                                    :class="{ 'block': isDashboardActive, 'hidden': !isDashboardActive }" role="region">
                                     <ul class="pt-1 ps-7 space-y-1">
                                         <li>
-                                            <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                                                href="/administrator/dashboard">
+                                            <a href="/administrator/dashboard"
+                                                class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg"
+                                                :class="{ 'bg-blue-500 text-white ': $route.path.startsWith('/administrator/dashboard') }">
                                                 Overview
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                                                href="/administrator/analytics">
-                                                Analytics <span
-                                                    class="ms-auto py-0.5 px-2 inline-flex items-center gap-x-1.5 text-xs bg-blue-400 text-white rounded-full dark:bg-neutral-600 dark:text-blue-400">Pro</span>
+                                            <a href="/merchant/analytics"
+                                                class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg"
+                                                :class="{ 'bg-blue-500 text-white ': $route.path.startsWith('/administrator/analytics') }">
+                                                Analytics
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
-
                             <!-- End Dashboard -->
 
                             <!-- Engagements -->
-
-                            <li class="hs-accordion" id="account-accordion">
+                            <li class="hs-accordion" id="engagement-accordion">
                                 <button type="button"
-                                    class="hs-accordion-toggle w-full text-start flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hs-accordion-active:text-white dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
-                                    aria-expanded="true" aria-controls="account-accordion-sub-1-collapse-1">
-                                    <span class="material-icons  material-symbols-outlined ">bento</span>
-
+                                    class="hs-accordion-toggle w-full text-start flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300"
+                                    :class="{ 'hs-accordion-active': isEngagementActive }" aria-expanded="true"
+                                    aria-controls="engagement-accordion-collapse">
+                                    <span class="material-icons">bento</span>
                                     Engagements
-                                    <span
-                                        class="material-icons material-symbols-outlined ms-auto  text-gray-600 group-hover:text-gray-500 dark:text-neutral-400">keyboard_arrow_right</span>
+                                    <span class="material-icons ms-auto">keyboard_arrow_right</span>
                                 </button>
 
-                                <div id="account-accordion-sub-1-collapse-1"
-                                    class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
-                                    role="region" aria-labelledby="account-accordion">
+                                <div id="engagement-accordion-collapse"
+                                    class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+                                    :class="{ 'block': isEngagementActive, 'hidden': !isEngagementActive }"
+                                    role="region">
                                     <ul class="pt-1 ps-7 space-y-1">
                                         <li>
-                                            <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                                                href="/administrator/discount-list">
+                                            <a href="/administrator/discount-list"
+                                                class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg"
+                                                :class="{ 'bg-blue-500 text-white hover:text-black': $route.path.startsWith('/administrator/discount-list') }">
                                                 Discounts
                                             </a>
                                         </li>
 
-                                        <li>
-                                            <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                                                href="/administrator/raffle-draw">
+                                        <li class="hs-accordion" id="users-accordion-sub-1">
+                                            <button type="button"
+                                                class="hs-accordion-toggle w-full text-start flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300"
+                                                :class="{ 'hs-accordion-active': isRaffleActive }" aria-expanded="true"
+                                                aria-controls="raffle-accordion-collapse">
                                                 Raffles
-                                            </a>
+                                                <span
+                                                    class="material-icons material-symbols-outlined ms-auto  text-gray-600 group-hover:text-gray-500 dark:text-neutral-400">keyboard_arrow_right</span>
+                                            </button>
+
+
+                                            <div id="raffle-accordion-collapse"
+                                                class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300"
+                                                :class="{ 'block': isRaffleActive, 'hidden': !isRaffleActive }"
+                                                role="region">
+                                                <ul class="pt-1 ps-2 space-y-1">
+                                                    <li>
+                                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200"
+                                                            :class="{ 'bg-blue-500 text-white hover:text-black': $route.path === '/administrator/raffle/pending' }"
+                                                            href="/administrator/raffle/pending">
+                                                            Raffles Pending
+                                                        </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200"
+                                                            :class="{ 'bg-blue-500 text-white hover:text-black': $route.path === '/administrator/raffle' }"
+                                                            href="/administrator/raffle">
+                                                            Raffles List
+                                                        </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 dark:text-neutral-200"
+                                                            :class="{ 'bg-blue-500 text-white hover:text-black': $route.path === '/administrator/raffle/archived' }"
+                                                            href="/administrator/raffle/archived">
+                                                            Raffles Archive
+                                                        </a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
                                         </li>
 
                                         <li>
-                                            <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
+                                            <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
+                                                :class="{ 'bg-blue-500 text-white hover:text-black': $route.path === '/administrator/flash-deals' }"
                                                 href="/administrator/flash-deals">
                                                 Flash Deals <span
                                                     class="ms-auto py-0.5 px-2 inline-flex items-center gap-x-1.5 text-xs bg-blue-400 text-white rounded-full dark:bg-neutral-600 dark:text-blue-400">Pro</span>
                                             </a>
                                         </li>
+
                                     </ul>
                                 </div>
                             </li>
-                            <!-- End Engagement -->
-
+                            <!-- End Engagements -->
 
                             <!-- Merchant -->
 
-                            <li class="hs-accordion" id="account-accordion">
+                            <li class="hs-accordion" id="merchant-accordion">
                                 <button type="button"
                                     class="hs-accordion-toggle w-full text-start flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hs-accordion-active:text-white dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
-                                    aria-expanded="true" aria-controls="account-accordion-sub-1-collapse-1">
+                                    :class="{ 'hs-accordion-active': isMerchantActive }"
+                                    aria-expanded="true"
+                                    aria-controls="merchant-accordion-collapse">
                                     <span class="material-icons  material-symbols-outlined ">group</span>
 
                                     Merchants
@@ -139,14 +178,16 @@ bg-white border-e border-gray-200 dark:bg-neutral-800 dark:border-neutral-700" r
 
                                 </button>
 
-                                <div id="account-accordion-sub-1-collapse-1"
+                                <div id="merchant-accordion-collapse"
                                     class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
-                                    role="region" aria-labelledby="account-accordion">
+                                    :class="{ 'block': isMerchantActive, 'hidden': !isMerchantActive }" role="region"
+                                    aria-labelledby="merchant-accordion">
                                     <ul class="pt-1 ps-7 space-y-1">
 
                                         <li>
                                             <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                                                href="//administratoradministrator/pending">
+                                                :class="{ 'bg-blue-500 text-white hover:text-black': $route.path === '/administrator/merchant/pending' }"
+                                                href="/administrator/merchant/pending">
 
                                                 Merchant Pending <span
                                                     class="ms-auto py-0.5 px-2 inline-flex items-center gap-x-1.5 text-xs bg-blue-400 text-white rounded-full dark:bg-neutral-600 dark:text-blue-400">Pro</span>
@@ -155,7 +196,8 @@ bg-white border-e border-gray-200 dark:bg-neutral-800 dark:border-neutral-700" r
 
                                         <li>
                                             <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                                                href="//administratoradministrator/list">
+                                                :class="{ 'bg-blue-500 text-white hover:text-black': $route.path === '/administrator/merchant/list' }"
+                                                href="/administrator/merchant/list">
 
                                                 Merchant List
                                             </a>
@@ -163,7 +205,8 @@ bg-white border-e border-gray-200 dark:bg-neutral-800 dark:border-neutral-700" r
 
                                         <li>
                                             <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                                                href="//administratoradministrator/archived">
+                                                :class="{ 'bg-blue-500 text-white hover:text-black': $route.path === '/administrator/merchant/archived' }"
+                                                href="/administrator/merchant/archived">
                                                 Merchant Archive
                                             </a>
                                         </li>
@@ -177,9 +220,10 @@ bg-white border-e border-gray-200 dark:bg-neutral-800 dark:border-neutral-700" r
                             <!-- Merchant -->
 
                             <li class="hs-accordion" id="account-accordion">
-                                <button type="button"
+                                <button type="button" :class="{ 'hs-accordion-active': isCustomerActive }"
+                                    aria-expanded="true"
                                     class="hs-accordion-toggle w-full text-start flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hs-accordion-active:text-white dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
-                                    aria-expanded="true" aria-controls="account-accordion-sub-1-collapse-1">
+                                    aria-controls="account-accordion-sub-1-collapse-1">
                                     <span class="material-icons  material-symbols-outlined ">group</span>
 
                                     Customers
@@ -189,13 +233,15 @@ bg-white border-e border-gray-200 dark:bg-neutral-800 dark:border-neutral-700" r
 
                                 <div id="account-accordion-sub-1-collapse-1"
                                     class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
-                                    role="region" aria-labelledby="account-accordion">
+                                    :class="{ 'block': isCustomerActive, 'hidden': !isCustomerActive }" role="region"
+                                    aria-labelledby="account-accordion">
                                     <ul class="pt-1 ps-7 space-y-1">
 
 
                                         <li>
                                             <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
-                                                href="/administrator/customer/list">
+                                                :class="{ 'bg-blue-500 text-white hover:text-black': $route.path === '/administrator/customer/pending' }"
+                                                href="/administrator/customer/pending">
 
                                                 Customer Pending
                                             </a>
@@ -203,6 +249,7 @@ bg-white border-e border-gray-200 dark:bg-neutral-800 dark:border-neutral-700" r
 
                                         <li>
                                             <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
+                                                :class="{ 'bg-blue-500 text-white hover:text-black': $route.path === '/administrator/customer/list' }"
                                                 href="/administrator/customer/list">
 
                                                 Customer List
@@ -211,6 +258,7 @@ bg-white border-e border-gray-200 dark:bg-neutral-800 dark:border-neutral-700" r
 
                                         <li>
                                             <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-300 dark:focus:text-neutral-300"
+                                                :class="{ 'bg-blue-500 text-white hover:text-black': $route.path === '/administrator/customer/archived' }"
                                                 href="/administrator/customer/archived">
                                                 Customer Archive
                                             </a>
@@ -225,6 +273,7 @@ bg-white border-e border-gray-200 dark:bg-neutral-800 dark:border-neutral-700" r
 
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300"
+                                    :class="{ 'bg-blue-500 text-white hover:text-black': $route.path === '/administrator/scanner' }"
                                     href="/administrator/scanner">
                                     <span class="material-icons  material-symbols-outlined ">qr_code_scanner</span>
 
@@ -234,6 +283,7 @@ bg-white border-e border-gray-200 dark:bg-neutral-800 dark:border-neutral-700" r
 
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300"
+                                    :class="{ 'bg-blue-500 text-white hover:text-black': $route.path === '/administrator/activity-log' }"
                                     href="/administrator/activity-log">
                                     <span class="material-icons material-symbols-outlined">
                                         rowing
@@ -243,6 +293,7 @@ bg-white border-e border-gray-200 dark:bg-neutral-800 dark:border-neutral-700" r
                             </li>
                             <li>
                                 <a class="flex items-center gap-x-3 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300"
+                                    :class="{ 'bg-blue-500 text-white hover:text-black': $route.path === '/administrator/billing' }"
                                     href="/administrator/billing">
                                     <span class="material-icons  material-symbols-outlined ">
                                         receipt_long
@@ -285,4 +336,34 @@ bg-white border-e border-gray-200 dark:bg-neutral-800 dark:border-neutral-700" r
     </body>
 </template>
 
-
+<script>
+export default {
+    computed: {
+        isDashboardActive() {
+            return this.$route.path.startsWith('/administrator/dashboard') || this.$route.path.startsWith('/merchant/analytics');
+        },
+        isEngagementActive() {
+            return this.$route.path.startsWith('/administrator/discount-list')
+                || this.$route.path.startsWith('/administrator/raffle-draw')
+                || this.$route.path.startsWith('/administrator/flash-deals')
+                || this.$route.path.startsWith('/administrator/raffle/create')
+                || this.$route.path.startsWith('/administrator/raffle')
+                ;
+        },
+        isMerchantActive() {
+            return this.$route.path.startsWith('/administrator/merchant/list')
+                || this.$route.path.startsWith('/administrator/merchant/archived')
+                || this.$route.path.startsWith('/administrator/merchant/pending');
+        },
+        isCustomerActive() {
+            return this.$route.path.startsWith('/administrator/customer/pending')
+                || this.$route.path.startsWith('/administrator/customer/list')
+                || this.$route.path.startsWith('/administrator/customer/archived');
+        },
+        isRaffleActive() {
+            return this.$route.path.startsWith('/administrator/raffle-draw')
+                || this.$route.path.startsWith('/administrator/raffle/create');
+        }
+    }
+}
+</script>

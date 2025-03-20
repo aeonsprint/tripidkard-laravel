@@ -56,8 +56,9 @@ export default {
         };
     },
     computed: {
+        // Filter raffles with status = 0
         activeRaffles() {
-            return this.raffles.filter(raffle => raffle.status === 1);
+            return this.raffles.filter(raffle => raffle.status === 0);
         }
     },
     methods: {

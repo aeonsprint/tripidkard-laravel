@@ -90,7 +90,7 @@
 
                             <!-- Discount Percentage -->
                             <div class="flex justify-between items-center bg-blue-100 p-4 rounded-lg mt-4">
-                                <span class="text-3xl font-bold text-blue-600">{{ userData.street }} {{ userData.city }} {{ userData.province }} {{ userData.zip }}</span>
+                                <span class="text-3xl font-bold text-blue-600 mx-auto">{{ userData.customer_card_num }} </span>
                                 <span class="flex items-center text-green-600 font-medium">
                                 </span>
                             </div>

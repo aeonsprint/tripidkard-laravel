@@ -134,14 +134,14 @@ Route::post('/api/influencer/qrcode', [QrcodeController::class, 'influencerQrCod
 Route::post('/api/home/qrcode', [QrcodeController::class, 'homeQrCode']);
 
 Route::post('/api/discount/store', [DiscountController::class, 'store']);
-
+Route::put('/api/raffles/{id}/update-status', [RaffleController::class, 'updateStatus']);
 Route::post('/api/raffles/create', [RaffleController::class, 'store']);
-
 Route::get('/api/raffles', [RaffleController::class, 'index']);
+Route::get('/api/merchant/raffles', [RaffleController::class, 'indexMerchant']);
 Route::get('/api/raffles/{id}/edit', [RaffleController::class, 'raffleEdit']);
 Route::get('/api/raffles/{id}/show', [RaffleController::class, 'raffleShow']);
 Route::post('/api/raffles/join', [RaffleDrawController::class, 'joinRaffle']);
-Route::get('/api//api/bookmarks/{id}/participants', [RaffleDrawController::class, 'getRaffleParticipants']);
+Route::get('/api/api/bookmarks/{id}/participants', [RaffleDrawController::class, 'getRaffleParticipants']);
 
 
 Route::get('/auth/google', [SocialController::class, 'redirectGoogle'])->name('google-auth');

@@ -12,8 +12,10 @@ import CustomerRegister from "./Pages/Dashboard/Admin/Customer/Register.vue";
 import AdminProfile from "./Pages/Dashboard/Admin/ProfileList.vue";
 import AdminDiscount from "./Pages/Dashboard/Admin/DiscountList.vue";
 import AdminAnalytics from "./Pages/Dashboard/Admin/Analytics.vue";
-import AdminRaffle from "./Pages/Dashboard/Admin/Raffle/RaffleList.vue";
-import AdminRaffleRegister from "./Pages/Dashboard/Admin/Raffle/RaffleRegister.vue";
+import AdminRafflePending from "./Pages/Dashboard/Admin/Raffle/RafflePending.vue";
+import AdminRaffleList from "./Pages/Dashboard/Admin/Raffle/RaffleList.vue";
+import AdminRaffleArchive from "./Pages/Dashboard/Admin/Raffle/RaffleArchived.vue";
+
 
 import AdminDeals from "./Pages/Dashboard/Admin/FlashDeals/FlashDealsMain.vue";
 import AdminLogs from "./Pages/Dashboard/Admin/ActivityLog.vue";
@@ -157,6 +159,18 @@ const routesAdmin = [
     },
 
     {
+        path: "/administrator/merchant/edit/:id",
+        name: "administrator.merchant.edit",
+        component: MerchantRegister,
+        meta: {
+            title: "Merchant Update",
+            breadcrumb: "administrator/merchant/register",
+            requiresAdminAuth: true,
+        },
+    },
+
+
+    {
         path: "/administrator/customer/register",
         name: "administrator.customer.register",
         component: CustomerRegister,
@@ -208,26 +222,63 @@ const routesAdmin = [
         },
     },
     {
-        path: "/administrator/raffle-draw/",
-        name: "administrator.raffle-draw",
-        component: AdminRaffle,
+        path: "/administrator/raffle/pending",
+        name: "administrator.raffle.pending",
+        component: AdminRafflePending,
         meta: {
-            title: "Raffle Draw",
-            breadcrumb: "administrator/raffle-draw",
+            title: "Raffle Pending",
+            breadcrumb: "administrator/raffle-pending",
+            requiresAdminAuth: true,
+        },
+    },
+    {
+        path: "/administrator/raffle/archived",
+        name: "administrator.raffle.archived",
+        component: AdminRaffleList,
+        meta: {
+            title: "Raffle Archived",
+            breadcrumb: "administrator/raffle-archived",
             requiresAdminAuth: true,
         },
     },
 
     {
-        path: "/administrator/raffle/register",
-        name: "administrator.raffle-register",
-        component: AdminRaffleRegister,
+        path: "/administrator/raffle",
+        name: "administrator.raffle",
+        component: AdminRaffleArchive,
         meta: {
-            title: "Raffle Register",
-            breadcrumb: "administrator/raffle-register",
+            title: "Raffle Draw",
+            breadcrumb: "administrator/raffle-draw",
             requiresAdminAuth: true,
         },
+
     },
+
+
+
+    // {
+    //     path: "/administrator/raffle-draw/",
+    //     name: "administrator.raffle-draw",
+    //     component: AdminRaffle,
+    //     meta: {
+    //         title: "Raffle Draw",
+    //         breadcrumb: "administrator/raffle-draw",
+    //         requiresAdminAuth: true,
+    //     },
+    // },
+
+
+
+    // {
+    //     path: "/administrator/raffle/register",
+    //     name: "administrator.raffle-register",
+    //     component: AdminRaffleRegister,
+    //     meta: {
+    //         title: "Raffle Register",
+    //         breadcrumb: "administrator/raffle-register",
+    //         requiresAdminAuth: true,
+    //     },
+    // },
 
     {
         path: "/administrator/billing/",

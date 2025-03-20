@@ -4,8 +4,7 @@
     <div class="w-full lg:ps-64 bg-[#f7f9fa]">
       <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
         <div class="flex justify-end mb-4">
-          <button class="px-4 py-2 border rounded-md text-red-700 hover:bg-red-100 mr-2">Delete</button>
-          <button class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Edit</button>
+          <button class="px-4 py-2 border rounded-md text-white bg-red-600 hover:bg-red-200 hover:text-black mr-2">Delete</button>
         </div>
 
         <!-- Raffle Details -->
@@ -95,13 +94,13 @@ export default {
   },
   computed: {
     activeRaffles() {
-      return this.raffles.filter(raffle => raffle.status === 0);
+      return this.raffles.filter(raffle => raffle.status === 1);
     }
   },
   methods: {
     async fetchRaffles() {
       try {
-        const response = await axios.get('/api/raffles');
+        const response = await axios.get('/api/merchant/raffles');
         this.raffles = response.data;
 
         // Fetch participants kapag nakuha na ang raffles
